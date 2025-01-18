@@ -3,22 +3,22 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 const userSchema = new mongoose.Schema({
-  userName: {
+  name: {
     type: String,
-    minLength: [3, "Username must contain at least 3 charcters."],
-    maxLength: [40, "Username cannot exceed 40 charcters."],
+    minLength: [3, "Username must caontain at least 3 characters."],
+    maxLength: [40, "Username cannot exceed 40 characters."],
   },
   password: {
     type: String,
     selected: false,
-    minLength: [8, "Password must contain at least 8 charcters."],
+    minLength: [8, "Password must caontain at least 8 characters."],
   },
   email: String,
   address: String,
   phone: {
     type: String,
-    minLength: [11, "Phone Number must contain 11 charcters."],
-    maxLength: [11, "Phone Number cannot exceed 11 charcters."],
+    minLength: [11, "Phone Number must caontain exact 11 digits."],
+    maxLength: [11, "Phone Number must caontain exact 11 digits."],
   },
   profileImage: {
     public_id: {
@@ -27,7 +27,6 @@ const userSchema = new mongoose.Schema({
     },
     url: {
       type: String,
-      required: true,
     },
   },
   paymentMethods: {
@@ -36,11 +35,11 @@ const userSchema = new mongoose.Schema({
       bankAccountName: String,
       bankName: String,
     },
+    easypaisa: {
+      easypaisaAccountNumber: Number,
+    },
     jazzcash: {
       jazzcashAccountNumber: Number,
-    },
-    easypasia: {
-      easypasiaAccountNumber: Number,
     },
     paypal: {
       paypalEmail: String,
@@ -48,28 +47,26 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ["Auctioneer", "Bidder", "Supper Admin"],
+    enum: ["Auctioneer", "Bidder", "Super Admin"],
   },
   unpaidCommission: {
     type: Number,
     default: 0,
   },
-
   auctionsWon: {
     type: Number,
     default: 0,
   },
-
-  monySpent: {
+  moneySpent: {
     type: Number,
     default: 0,
   },
-
   createdAt: {
     type: Date,
     default: Date.now,
   },
 });
+
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     next();

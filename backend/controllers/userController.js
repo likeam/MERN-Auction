@@ -17,7 +17,7 @@ export const register = catchAsyncErrors(async (req, res, next) => {
   }
 
   const {
-    userName,
+    name,
     email,
     password,
     phone,
@@ -31,7 +31,7 @@ export const register = catchAsyncErrors(async (req, res, next) => {
     paypalEmail,
   } = req.body;
 
-  if (!userName || !email || !phone || !password || !address || !role) {
+  if (!name || !email || !phone || !password || !address || !role) {
     return next(new ErrorHandler("Please fill full form.", 400));
   }
 
@@ -82,7 +82,7 @@ export const register = catchAsyncErrors(async (req, res, next) => {
   }
 
   const user = await User.create({
-    userName,
+    name,
     email,
     password,
     phone,
@@ -108,6 +108,10 @@ export const register = catchAsyncErrors(async (req, res, next) => {
         paypalEmail,
       },
     },
+  });
+  res.status(201).json({
+    success: true,
+    message: "User Registered Successfully",
   });
   generateToken(user, "User Resgiterd Successfully", 201, res);
 });
