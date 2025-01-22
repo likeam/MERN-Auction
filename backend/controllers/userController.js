@@ -77,7 +77,7 @@ export const register = catchAsyncErrors(async (req, res, next) => {
       cloudinaryResponse.error || "Unknown Cloudianry "
     );
     return next(
-      new ErrorHandler("Failed to upload profile image to cloudinary", 500)
+      new ErrorHandler("Failed to upload  image to cloudinary", 500)
     );
   }
 
