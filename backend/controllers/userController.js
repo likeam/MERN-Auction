@@ -76,7 +76,7 @@ export const register = catchAsyncErrors(async (req, res, next) => {
       "Cloudinary error : ",
       cloudinaryResponse.error || "Unknown Cloudianry "
     );
-    return next(new ErrorHandler("Failed  cloudinary", 500));
+    return next(new ErrorHandler("Failed to  cloudinary", 500));
   }
 
   const user = await User.create({
