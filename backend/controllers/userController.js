@@ -74,7 +74,7 @@ export const register = catchAsyncErrors(async (req, res, next) => {
   if (!cloudinaryResponse || cloudinaryResponse.error) {
     console.log(
       "Cloudinary error : ",
-      cloudinaryResponse.error || "Unknown Cloudianry "
+      cloudinaryResponse.error || "Unknown to Cloudianry "
     );
     return next(new ErrorHandler("Failed to  cloudinary", 500));
   }
